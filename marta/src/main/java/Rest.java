@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class Rest {
-    ProductManager miproductor;
+    ProductManager miproductoor;
 
     @GET
     @Path("/Productes/")
     @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<Producto> getProductos() {
-        return miproductor.productosOrdenados();
+        return miproductoor.productosOrdenados();
     }
 }
 
