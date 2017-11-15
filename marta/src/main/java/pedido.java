@@ -1,27 +1,50 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class pedido {
-    ArrayList<productocantidad> pedidos;
-    String nombre;
-    pedido siguiente;
-    public String getNombre() {
-        return nombre;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+public class Pedido {
+
+    public  ArrayList<Producto> productos;
+    Usuario usuario;
+    int id;
+
+    public Pedido(int id, Usuario usuario){
+        productos = new ArrayList<Producto>();
+        this.setId(id);
+        this.setUsuario(usuario);
     }
 
-    public ArrayList<productocantidad> getPedidos() {
-        return pedidos;
-    }
-    public void setPedidos(ArrayList<productocantidad> pedidos) {
-        this.pedidos = pedidos;
-    }
-    public void pedido(){
+    public Pedido(){
 
     }
-    public pedido getSiguiente() {return siguiente;}
-    public void setSiguiente(pedido siguiente) {this.siguiente = siguiente;}
+
+    public void nuevoProducto(Producto nuevo){
+        this.productos.add(nuevo);
+    }
+    public ArrayList<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(ArrayList<Producto> productos) {
+        this.productos = productos;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+
+
 }
 

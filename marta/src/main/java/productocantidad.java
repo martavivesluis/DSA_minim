@@ -1,11 +1,11 @@
-public class productocantidad {
+public class Productocantidad {
     int cantidad;
     String nombreproducto;
-    public productocantidad()
+    public Productocantidad()
     {
 
     }
-    public productocantidad( String nombre, int cantidad)
+    public Productocantidad(String nombre, int cantidad)
     {
         this.cantidad = cantidad;
         this.nombreproducto = nombre;

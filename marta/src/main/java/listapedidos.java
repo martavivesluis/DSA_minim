@@ -1,14 +1,42 @@
 import java.util.ArrayList;
 
-public class listapedidos {
+public class Listapedidos {
+    public class Nodo{
+        Nodo siguiente;
+        Pedido contenido;
+    }
 int numeropedidos;
-pedido first;
-    public pedido getUltim()
-    {
-        pedido actual = this.first;
-        if(this.first == null){
+    Nodo first;
+    public Listapedidos(){}
 
-           //llistat buit
+    public void push(Pedido pedido)
+    {
+        Nodo nuevo = new Nodo();
+        nuevo.contenido = pedido;
+        Nodo ultimo = getUltim();
+        if(ultimo == null){
+            first = nuevo;
+        }else {
+            ultimo.siguiente = nuevo;
+        }
+    }
+
+    public Pedido desencuaFirstPedido(){
+        Nodo aretornar = this.first;
+        if(aretornar == null){
+            return null;
+        }else {
+            Nodo futuroprimero = aretornar.siguiente;
+            this.first = futuroprimero;
+            return aretornar.contenido;
+        }
+    }
+
+    public Nodo getUltim()
+    {
+        Nodo actual = this.first;
+        if(this.first == null){
+            return null;
         }
         int i =0;
         while(actual.siguiente != null)
@@ -17,31 +45,5 @@ pedido first;
             actual = actual.siguiente;
         }
         return actual;
-    }
-    public int push(ArrayList<productocantidad> pedidos)
-    {
-
-        // this.push(nuevopedido);
-        if(this.numeropedidos == 0) {
-
-            pedido nou = new pedido();
-            nou.pedidos = pedidos;
-            this.first = nou;
-            numeropedidos++;
-            return 0;
-        }else{
-            pedido ultim = getUltim();
-            pedido nou = new pedido();
-            nou.pedidos = pedidos;
-            nou.siguiente = null;
-            ultim.siguiente = nou;
-            numeropedidos++;
-            return 0;
-        }
-
-    }
-    public void buidarElement(pedido node)
-    {
-        node.pedidos = null;
     }
 }

@@ -1,5 +1,3 @@
-import junit.framework.Assert;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,23 +18,41 @@ public class mitest {
     }
     @Test
     public void test()
-{
-        producto miProducto = new producto("lampara", 20);
-        producto miProducto2 = new producto("lapiz", 50);
-        producto miProducto3 = new producto("casco", 35);
+{   int pedidoactual;
+    int miotropedido;
+        Producto miProducto = new Producto("lampara", 20);
+        Producto miProducto2 = new Producto("lapiz", 50);
+        Producto miProducto3 = new Producto("casco", 35);
+        Usuario miusuari = new Usuario("marta");
+        Usuario miusuari2 = new Usuario("anna");
 
         mimundo.añadirProducto(miProducto);
         mimundo.añadirProducto(miProducto2);
         mimundo.añadirProducto(miProducto3);
-        mimundo.productosOrdenados();
-        mimundo.productosDisponibles();
-    ArrayList<productocantidad> miarray = new ArrayList<productocantidad>();
-    ArrayList<productocantidad> auxiliar = new ArrayList<productocantidad>();
-        productocantidad r = new productocantidad("lampara",50);
-        productocantidad s = new productocantidad("bicicleta",60);
-        miarray.add(r);
-        miarray.add(s);
-        mimundo.realizarPedido("marta",miarray);
+        mimundo.añadirUsuario(miusuari);
+        mimundo.añadirUsuario(miusuari2);
+        //mimundo.productosOrdenados();
+        //mimundo.productosDisponibles();
+        pedidoactual = mimundo.crearPedido(miusuari);
+        mimundo.añadirProductoaPedido(miProducto3,pedidoactual);
+        mimundo.añadirProductoaPedido(miProducto2,pedidoactual);
+        mimundo.añadirProductoaPedido(miProducto2,pedidoactual);//pedido actual = 1 casco 2 lapices
+
+        miotropedido = mimundo.crearPedido(miusuari2);
+        mimundo.añadirProductoaPedido(miProducto,miotropedido);
+        mimundo.añadirProductoaPedido(miProducto3,miotropedido);//2 lamparas
+        mimundo.listarPedidos(miusuari);
+        //System.out.println("vacio");
+        mimundo.servirPedido();
+        System.out.println("primerpedido");
+        mimundo.listarPedidos(miusuari);
+        mimundo.listarVentas();
+        mimundo.servirPedido();
+    System.out.println("segundopedido");
+        mimundo.listarPedidos(miusuari2);
+        mimundo.listarVentas();
+
+
     }
 }
 

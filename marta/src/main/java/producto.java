@@ -1,12 +1,12 @@
-public class producto {
+public class Producto {
     String nombre;
     int precio;
-    public producto()
+    public Producto()
     {
         this.precio =0;
 
     }
-    public producto( String nombre, int precio)
+    public Producto(String nombre, int precio)
     {
         this.precio = precio;
         this.nombre = nombre;
