@@ -32,7 +32,7 @@ public class mitest {
         Usuario miusuari = new Usuario("marta");
         mimundo.añadirUsuario(miusuari);
         mimundo.añadirUsuario(miusuari);
-           
+
     }
     @Test
     public void testRealitzarComanda(){
