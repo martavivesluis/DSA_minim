@@ -1,3 +1,5 @@
+package exam;
+
 public class Productocantidad {
     int cantidad;
     String nombreproducto;

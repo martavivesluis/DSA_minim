@@ -92,7 +92,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>edu.upc.dsa.Main</mainClass>
+                    <mainClass>edu.upc.dsa.exam.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>

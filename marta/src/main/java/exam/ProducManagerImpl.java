@@ -1,3 +1,5 @@
+package exam;
+
 import java.util.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,6 +23,26 @@ public class ProducManagerImpl implements ProductManager {
         this.listaDePedidos = new Listapedidos();
         this.todosLosPedidosEver = new HashMap<Integer,Pedido>();
         this.productosenventa = new HashMap<String,Producto>();
+        Usuario inicial = new Usuario("Juan");
+        this.añadirUsuario(inicial);
+        Producto miProducto = new Producto("lampara", 20);
+        Producto miProducto2 = new Producto("lapiz", 50);
+        Producto miProducto3 = new Producto("casco", 35);
+        Usuario miusuari = new Usuario("marta");
+        Usuario miusuari2 = new Usuario("anna");
+        this.añadirProducto(miProducto);
+        this.añadirProducto(miProducto2);
+        this.añadirProducto(miProducto3);
+        this.añadirUsuario(miusuari);
+        this.añadirUsuario(miusuari2);
+        int pedidoactual = this.crearPedido(miusuari).getId();
+        this.añadirProductoaPedido(miProducto3,pedidoactual);
+        this.añadirProductoaPedido(miProducto3,pedidoactual);
+        this.añadirProductoaPedido(miProducto2,pedidoactual);
+        this.añadirProductoaPedido(miProducto2,pedidoactual);//pedido actual = 1 casco 2 lapices
+        int miotropedido = this.crearPedido(miusuari2).getId();
+        this.añadirProductoaPedido(miProducto,miotropedido);
+        this.añadirProductoaPedido(miProducto3,miotropedido);//2 lamparas
     }
     public static ProducManagerImpl getInstance() {
         if (mimundo == null)
@@ -41,6 +63,10 @@ public class ProducManagerImpl implements ProductManager {
             logger.info("usuari afegit");
 
         }
+    }
+
+    public Collection listarUsuarios(){
+        return usuarios.values();
     }
 
     public ArrayList<Producto> productosOrdenados() {
@@ -66,17 +92,16 @@ public class ProducManagerImpl implements ProductManager {
         return ordenados;
     }
 
-    public int crearPedido(Usuario usuari) {//una comanda pot estar buida s'omplirà mès endavant
+    public Pedido crearPedido(Usuario usuari) {//una comanda pot estar buida s'omplirà mès endavant
         logger.info("numero actual de comandes = "+idsdepedido);
         Pedido nuevo = new Pedido(this.idsdepedido,usuari);
         int actual = this.idsdepedido;
-        this.idsdepedido++;
         this.todosLosPedidosEver.put(nuevo.id,nuevo);
+        this.idsdepedido++;
         listaDePedidos.push(nuevo);
-        //usuari.getMispedidos().add(nuevo);
         logger.info("numero actual de comandes = "+idsdepedido);
-        return actual;
-        }
+        return nuevo;
+    }
 
     //@Override
     public void añadirProductoaPedido(Producto producto, int id) {
@@ -101,9 +126,9 @@ public class ProducManagerImpl implements ProductManager {
         ArrayList<Producto> milista = p.getProductos();
         for (Producto nuevo:milista)
         {
-           int unidadesActuales = productosVendidos.get(nuevo.getNombre());
-           unidadesActuales  = unidadesActuales+1;
-           productosVendidos.put(nuevo.getNombre(),unidadesActuales);
+            int unidadesActuales = productosVendidos.get(nuevo.getNombre());
+            unidadesActuales  = unidadesActuales+1;
+            productosVendidos.put(nuevo.getNombre(),unidadesActuales);
 
         }
 
@@ -120,13 +145,13 @@ public class ProducManagerImpl implements ProductManager {
 
     @Override
     public ArrayList<Pedido> listarPedidos(Usuario u) {
-      ArrayList<Pedido> mispedidos = u.getMispedidos();
-      if(u.getMispedidos()==null)
-      {
-          logger.info("no s'han processat encara cap comanda");
-      }
-      ArrayList<Producto> productos = new ArrayList<Producto>();
-      int numeroDelPedido;
+        ArrayList<Pedido> mispedidos = u.getMispedidos();
+        if(u.getMispedidos()==null)
+        {
+            logger.info("no s'han processat encara cap comanda");
+        }
+        ArrayList<Producto> productos = new ArrayList<Producto>();
+        int numeroDelPedido;
         for (int x = 0; x < mispedidos.size(); x++) {
             productos = mispedidos.get(x).getProductos();
             numeroDelPedido=mispedidos.get(x).getId();
@@ -152,15 +177,23 @@ public class ProducManagerImpl implements ProductManager {
 
 
     @Override
-    public void listarVentas()
+    public ArrayList<Venda> listarVentas()
     {
+        ArrayList<Venda> vendas = new ArrayList<>();
+
         Iterator it = productosVendidos.entrySet().iterator();
         while (it.hasNext()) {
-            Map.Entry e = (Map.Entry)it.next();
-            logger.info(e.getKey() + " " + e.getValue());
+            Map.Entry<String,Integer> e = (Map.Entry)it.next();
+            Venda v = new Venda();
+            v.prod = e.getKey();
+            v.unidadesVendidas =  e.getValue();
+            vendas.add(v);
         }
-
-
+        Collections.sort(vendas);
+        for (int i = vendas.size() - 1; i >= 0; i--) {
+            logger.info(vendas.get(i).prod + " " + vendas.get(i).unidadesVendidas);
+        }
+        return vendas;
     }
 
     public void reiniciarSingleton() {

@@ -1,3 +1,5 @@
+package exam;
+
 import java.util.ArrayList;
 
 public interface ProductManager {
@@ -7,7 +9,7 @@ public interface ProductManager {
 
     public void productosDisponibles();
 
-    public int crearPedido(Usuario usuari);
+    public Pedido crearPedido(Usuario usuari);
 
     public void añadirProductoaPedido(Producto miproducto, int id);
 
@@ -15,6 +17,6 @@ public interface ProductManager {
 
     public ArrayList<Pedido> listarPedidos(Usuario u);
 
-    public void listarVentas();
+    public ArrayList<Venda> listarVentas();
 }
 

@@ -1,10 +1,11 @@
+import exam.ProducManagerImpl;
+import exam.Producto;
+import exam.Usuario;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
 
 public class mitest {
     ProducManagerImpl mimundo;
@@ -45,7 +46,7 @@ public class mitest {
         mimundo.añadirProducto(miProducto2);
         mimundo.añadirProducto(miProducto3);
         mimundo.añadirUsuario(miusuari);
-        pedidoactual = mimundo.crearPedido(miusuari);
+        pedidoactual = mimundo.crearPedido(miusuari).getId();
         mimundo.añadirProductoaPedido(miProducto3,pedidoactual);
         mimundo.añadirProductoaPedido(miProducto2,pedidoactual);
         mimundo.añadirProductoaPedido(miProducto2,pedidoactual);//pedido actual = 1 casco 2 lapices
@@ -67,11 +68,12 @@ public class mitest {
         mimundo.añadirProducto(miProducto3);
         mimundo.añadirUsuario(miusuari);
         mimundo.añadirUsuario(miusuari2);
-        pedidoactual = mimundo.crearPedido(miusuari);
+        pedidoactual = mimundo.crearPedido(miusuari).getId();
+        mimundo.añadirProductoaPedido(miProducto3,pedidoactual);
         mimundo.añadirProductoaPedido(miProducto3,pedidoactual);
         mimundo.añadirProductoaPedido(miProducto2,pedidoactual);
         mimundo.añadirProductoaPedido(miProducto2,pedidoactual);//pedido actual = 1 casco 2 lapices
-        miotropedido = mimundo.crearPedido(miusuari2);
+        miotropedido = mimundo.crearPedido(miusuari2).getId();
         mimundo.añadirProductoaPedido(miProducto,miotropedido);
         mimundo.añadirProductoaPedido(miProducto3,miotropedido);//2 lamparas
         mimundo.servirPedido();
