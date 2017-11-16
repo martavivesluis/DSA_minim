@@ -1,0 +1,5 @@
+la primera taula hauria de contenir tots els camps referits a un usuari. la segona hauria de contenir els productes disponibles
+a la venta amb el seu preu corresponent. En la meva estructura crearia una tercera taula amb els productes i la id de la comanda a la 
+qual pertanyen. En aquesta tercera taula els productes juntament amb el id poden ser registres repetits. Necessitarem una taula previament
+creada a aquesta tercera, ja que farà referencia a la anterior, una taula amb la id de comanda i el usuari(id) el qual ha realitzat la
+comanda.
